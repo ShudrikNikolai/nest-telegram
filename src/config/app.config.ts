@@ -1,10 +1,9 @@
 import { ConfigType, registerAs } from '@nestjs/config';
-
 import { env, envNumber } from '@/global/env';
 
-export const appRegToken = 'app';
-
 const globalPrefix = env('GLOBAL_PREFIX', 'api');
+
+export const appRegToken = 'app';
 
 export const AppConfig = registerAs(appRegToken, () => ({
   name: env('APP_NAME'),
