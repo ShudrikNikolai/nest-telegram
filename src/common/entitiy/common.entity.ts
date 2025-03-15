@@ -14,10 +14,10 @@ export abstract class CommonEntity extends BaseEntity {
   id: ObjectId;
 
   @CreateDateColumn({ name: 'createdAt' })
-  createdAt: Date;
+  createdAt: Date = new Date();
 
   @UpdateDateColumn({ name: 'updatedAt' })
-  updatedAt: Date;
+  updatedAt: Date = new Date();
 }
 
 export abstract class CompleteEntity extends CommonEntity {
