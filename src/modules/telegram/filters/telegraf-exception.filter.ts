@@ -1,6 +1,6 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { TelegrafArgumentsHost } from 'nestjs-telegraf';
-import { Context } from '@/modules/telegram/interfaces/context.interface';
+import { Context } from '@/modules/telegram/interfaces/scene-context.interface';
 
 @Catch()
 export class TelegrafExceptionFilter implements ExceptionFilter {
