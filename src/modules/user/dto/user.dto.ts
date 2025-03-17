@@ -24,9 +24,6 @@ export class UserDto {
 
   @ApiProperty({ required: true })
   telegramId: number;
-
-  @ApiProperty({ required: true, default: 1 })
-  status: number;
 }
 
 export class UserQueryDto {}
