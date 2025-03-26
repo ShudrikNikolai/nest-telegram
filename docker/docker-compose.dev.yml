@@ -1,13 +1,13 @@
 services:
-  g_tg_app:
-    container_name: "g_tg_app"
+  g_tg_dev_app:
+    container_name: "g_tg_dev_app"
     restart: "always"
     build:
       context: ..
       dockerfile: ../Dockerfile
     environment:
       - TZ=Europe/Moscow
-      - NODE_ENV=prod
+      - NODE_ENV=development
       - PORT=4000
       - HOST=0.0.0.0
       - TELEGRAM_USERNAME=${TELEGRAM_USERNAME:?err}
