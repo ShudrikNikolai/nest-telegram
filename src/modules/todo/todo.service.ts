@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ObjectId, Repository } from 'typeorm';
 
-import { TodoEntity } from '@/modules/todo/todo.entity';
-import { TodoDto, TodoUpdateDto } from './todo.dto';
+import { TodoDto, TodoUpdateDto } from './dto/todo.dto';
+import { TodoEntity } from './todo.entity';
 
 @Injectable()
 export class TodoService {
@@ -27,12 +27,7 @@ export class TodoService {
   }
 
   async create(dto: TodoDto) {
-    console.log('create value >>>', dto);
-    const res = await this.todoRepository.save(dto);
-
-    console.log('create res >>>', res);
-
-    return res;
+    return this.todoRepository.save(dto);
   }
 
   async update(id: ObjectId, dto: TodoUpdateDto) {
@@ -41,6 +36,10 @@ export class TodoService {
 
   async delete(id: ObjectId) {
     const item = await this.detail(id);
+
+    if (!item) {
+      throw new NotFoundException('Запись не найдена');
+    }
 
     await this.todoRepository.remove(item);
   }

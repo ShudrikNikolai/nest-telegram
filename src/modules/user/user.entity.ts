@@ -1,16 +1,16 @@
 import { Column, Entity } from 'typeorm';
-import { CommonEntity } from '@/common/entitiy/common.entity';
+import { CommonEntity } from '@/common/entities/common.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity extends CommonEntity {
   @Column({ nullable: true })
-  lastName: string;
+  lastName: string | null = null;
 
   @Column({ nullable: true })
-  firstName: string;
+  firstName: string | null = null;
 
   @Column({ nullable: true })
-  userName: string;
+  username: string;
 
   @Column({ name: 'avatar', nullable: true, default: null })
   avatar: string | null = null;
@@ -19,7 +19,7 @@ export class UserEntity extends CommonEntity {
   phone: string | null = null;
 
   @Column({ type: 'tinyint', nullable: true, default: 1 })
-  status: number;
+  status: number = 1;
 
   @Column({ unique: true })
   telegramId: number;

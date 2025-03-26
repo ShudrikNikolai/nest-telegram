@@ -1,17 +1,18 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { Column, Entity, JoinColumn, ManyToOne, Relation } from 'typeorm';
-import { CompleteEntity } from '@/common/entitiy/common.entity';
+import { ApiProperty } from '@nestjs/swagger';
+
+import { CompleteEntity } from '@/common/entities/common.entity';
 import { UserEntity } from '@/modules/user/user.entity';
 
 @Entity('todo')
 export class TodoEntity extends CompleteEntity {
   @Column()
   @ApiProperty({ description: 'value' })
-  value: string;
+  value: string | null = null;
 
   @ApiProperty({ description: 'status' })
   @Column({ default: false })
-  status: boolean;
+  status: boolean = false;
 
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'telegramId' })

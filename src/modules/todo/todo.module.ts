@@ -5,12 +5,10 @@ import { TodoController } from './todo.controller';
 import { TodoEntity } from './todo.entity';
 import { TodoService } from './todo.service';
 
-const services = [TodoService];
-
 @Module({
   imports: [TypeOrmModule.forFeature([TodoEntity])],
   controllers: [TodoController],
-  providers: [...services],
-  exports: [TypeOrmModule, ...services],
+  providers: [TodoService],
+  exports: [TypeOrmModule, TodoService],
 })
 export class TodoModule {}
