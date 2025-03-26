@@ -18,6 +18,15 @@ export class HealthController {
     private disk: DiskHealthIndicator,
   ) {}
 
+  @Get('me')
+  @HealthCheck()
+  me() {
+    return {
+      status: 200,
+      message: 'Health check',
+    };
+  }
+
   @Get('network')
   @HealthCheck()
   async checkNetwork() {
