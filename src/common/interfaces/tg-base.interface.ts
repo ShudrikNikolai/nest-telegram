@@ -1,4 +1,4 @@
-interface IFrom {
+export interface IFrom {
   id: number;
   is_bot: boolean;
   first_name: string;
@@ -7,7 +7,7 @@ interface IFrom {
   language_code: string;
 }
 
-interface IChat {
+export interface IChat {
   id: number;
   first_name: string;
   last_name: string;
@@ -15,14 +15,14 @@ interface IChat {
   type: string;
 }
 
-interface IContact {
+export interface IContact {
   last_name: string;
   first_name: string;
   user_id: number;
   phone_number: string;
 }
 
-interface IMessage {
+export interface IMessage {
   message_id: number;
   from: IFrom;
   chat: IChat;

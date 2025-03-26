@@ -3,7 +3,7 @@ import { TelegrafModule } from 'nestjs-telegraf';
 import { ConfigService } from '@nestjs/config';
 
 import { TelegramModule } from '@/modules/telegram/telegram.module';
-import { sessionMiddleware } from '@/modules/telegram/middleware/session.middleware';
+import { TgSessionMiddleware } from '@/common/middlewares/tg-session.middleware';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { sessionMiddleware } from '@/modules/telegram/middleware/session.middlew
         token: configService.get<string>('TELEGRAM_TOKEN') ?? '',
         botName: configService.get<string>('TELEGRAM_NAME'),
         include: [TelegramModule],
-        middlewares: [sessionMiddleware],
+        middlewares: [TgSessionMiddleware],
       }),
     }),
     TelegramModule,
