@@ -1,5 +1,5 @@
 import { ConfigType, registerAs } from '@nestjs/config';
-import { env, envNumber } from '@/global/env';
+import { env, envNumber, envString } from '@/global/env';
 
 const globalPrefix = env('GLOBAL_PREFIX', 'api');
 
@@ -9,6 +9,7 @@ export const AppConfig = registerAs(appRegToken, () => ({
   name: env('APP_NAME'),
   port: envNumber('APP_PORT', 3000),
   baseUrl: env('APP_BASE_URL'),
+  version: envString('APP_VERSION'),
   globalPrefix,
   locale: env('APP_LOCALE', 'ru-RU'),
   logger: {

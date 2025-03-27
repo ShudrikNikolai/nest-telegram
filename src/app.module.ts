@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+
 import config from '@/config';
+
 import { DatabaseModule } from '@/shared/database/database.module';
-import { TgModule } from '@/shared/telegram/telegram.module';
-import { TodoModule } from '@/modules/todo/todo.module';
 import { HealthModule } from '@/modules/health/health.module';
+import { SharedModule } from '@/shared/shared.module';
+import { TgModule } from '@/shared/telegram/telegram.module';
 
 @Module({
   imports: [
@@ -16,10 +18,9 @@ import { HealthModule } from '@/modules/health/health.module';
     }),
     DatabaseModule,
     TgModule,
-    TodoModule,
+    SharedModule,
     HealthModule,
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}
