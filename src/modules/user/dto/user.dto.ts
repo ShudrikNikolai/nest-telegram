@@ -26,4 +26,7 @@ export class UserDto {
   telegramId: number;
 }
 
-export class UserUpdateDto extends PartialType(UserDto) {}
+export class UserUpdateDto extends PartialType(UserDto) {
+  @ApiProperty({ required: false })
+  avatar: string;
+}

@@ -62,16 +62,17 @@ export class UserService {
 
   async approvePhone(contact: TgContactDto): Promise<UserEntity> {
     try {
-      const user = await this.findUserByTelegramId(contact.userId);
+      const user = await this.findUserByTelegramId(contact.telegramId);
 
       if (!user) {
-        this.loggerService.error(`This user not found: ${contact.userId}`);
-        throw new Error(`This user not found: ${contact.userId}`);
+        this.loggerService.error(`This user not found: ${contact.telegramId}`);
+        throw new Error(`This user not found: ${contact.telegramId}`);
       }
 
+      //
       if (user.phoneApproved) {
         this.loggerService.warn(
-          `This user already approve his number: ${contact.userId}`,
+          `This user already approve his number: ${contact.telegramId}`,
         );
 
         return user;
@@ -79,11 +80,11 @@ export class UserService {
 
       await this.userRepository.updateOne(
         {
-          telegramId: contact.userId,
+          telegramId: contact.telegramId,
         },
         {
           $set: {
-            phone: contact.phoneNumber,
+            phone: contact.phone,
             lastName: contact.lastName || user.lastName,
             firstName: contact.firstName || user.firstName,
             phoneApproved: true,
@@ -96,11 +97,11 @@ export class UserService {
       return user;
     } catch (e) {
       this.loggerService.error(
-        `Approve Phone: ${contact.userId}`,
+        `Approve Phone: ${contact.telegramId}`,
         JSON.stringify(e),
       );
 
-      throw new Error(`Approve Phone: ${contact.userId}`);
+      throw new Error(`Approve Phone: ${contact.telegramId}`);
     }
   }
 

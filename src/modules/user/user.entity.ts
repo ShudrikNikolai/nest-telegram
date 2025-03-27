@@ -1,6 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 import { CommonEntity } from '@/common/entities/common.entity';
 
+@Index(['telegramId', 'username'])
+@Index(['telegramId', 'phoneApproved'])
+@Index(['telegramId', 'status'])
 @Entity({ name: 'user' })
 export class UserEntity extends CommonEntity {
   @Column({ nullable: true })
@@ -24,6 +27,7 @@ export class UserEntity extends CommonEntity {
   @Column({ unique: true })
   telegramId: number;
 
+  @Index()
   @Column({ nullable: false, default: false })
   phoneApproved: boolean = false;
 }
