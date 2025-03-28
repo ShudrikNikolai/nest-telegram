@@ -2,18 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { Telegraf } from 'telegraf';
 import { InjectBot } from 'nestjs-telegraf';
 // import { ObjectId } from 'typeorm'; // блятский ObjectId
-import { env } from '@/global/env';
 import { Context, ITgCamel } from '@/common/interfaces';
 import { LoggerService } from '@/shared/logger/logger.service';
 import { UserService } from '@/modules/user/user.service';
 import { TodoService } from '@/modules/todo/todo.service';
 import { TodoEntity } from '@/modules/todo/todo.entity';
 import { APP, BUTTONS, TEXTS } from './constants';
+import { TELEGRAM_BOT } from '@/constants/tg-name.constant';
 
 @Injectable()
 export class TelegramService {
   constructor(
-    @InjectBot(env('TELEGRAM_USERNAME')) private botService: Telegraf,
+    @InjectBot(TELEGRAM_BOT) private botService: Telegraf,
     private readonly userService: UserService,
     private readonly todoService: TodoService,
     private readonly loggerService: LoggerService,
