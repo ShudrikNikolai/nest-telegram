@@ -8,10 +8,10 @@ import {
 
 export class TgContactDto {
   @IsNumber()
-  userId: number;
+  telegramId: number;
 
   @IsString()
-  phoneNumber: string;
+  phone: string;
 
   @IsOptional()
   @IsString()

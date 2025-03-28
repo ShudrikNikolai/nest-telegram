@@ -11,6 +11,6 @@ import { LoggerModule } from './logger/logger.module';
     // http
     HttpModule,
   ],
-  exports: [HttpModule],
+  exports: [HttpModule, LoggerModule],
 })
 export class SharedModule {}

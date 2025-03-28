@@ -1,10 +1,11 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { TelegrafExecutionContext, TelegrafException } from 'nestjs-telegraf';
-import { Context } from '@/modules/telegram/interfaces/context.interface';
 import { ConfigService } from '@nestjs/config';
 
+import { Context } from '@/common/interfaces/tg-context.interface';
+
 @Injectable()
-export class AdminGuard implements CanActivate {
+class AdminGuard implements CanActivate {
   constructor(private readonly configService: ConfigService) {}
   private readonly ADMIN_IDS: number[] | undefined =
     this.configService.get('ADMIN_IDS');
@@ -30,3 +31,5 @@ export class AdminGuard implements CanActivate {
     return false;
   }
 }
+
+export default AdminGuard;

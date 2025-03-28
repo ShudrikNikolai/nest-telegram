@@ -13,7 +13,11 @@ import { TgModule } from '@/shared/telegram/telegram.module';
     ConfigModule.forRoot({
       isGlobal: true,
       expandVariables: true,
-      envFilePath: ['.env.local', `.env.${process.env.NODE_ENV}`, '.env'],
+      envFilePath: [
+        //'./config/.env.local',
+        //`./config/.env.${process.env.NODE_ENV}`,
+        './config/.env',
+      ],
       load: [...Object.values(config)],
     }),
     DatabaseModule,

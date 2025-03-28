@@ -1,10 +1,14 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
 
 export class TodoDto {
-  @ApiProperty({ description: 'текст' })
-  @IsString()
+  @ApiProperty({ description: 'текст', required: true })
   value: string;
+
+  @ApiProperty({ description: 'cratedBy', required: true })
+  cratedBy: number;
 }
 
-export class TodoUpdateDto extends PartialType(TodoDto) {}
+export class TodoUpdateDto extends PartialType(TodoDto) {
+  @ApiProperty({ description: 'updatedBy', required: true })
+  updatedBy: number;
+}

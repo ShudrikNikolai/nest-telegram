@@ -2,9 +2,9 @@ import { Module } from '@nestjs/common';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { ConfigService } from '@nestjs/config';
 
-import { TelegramModule } from '@/modules/telegram/telegram.module';
-import { TgSessionMiddleware } from '@/common/middlewares/tg-session.middleware';
-
+import { TelegramModule } from '@/bots/base/telegram.module';
+import { TgSessionMiddleware } from './middlewares/tg-session.middleware';
+// навернем говнеца тут, потом переделаю мб
 @Module({
   imports: [
     TelegrafModule.forRootAsync({

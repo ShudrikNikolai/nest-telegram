@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ObjectId, Repository } from 'typeorm';
+import { MongoRepository } from 'typeorm';
+import { ObjectId } from 'mongodb'; // <- в падлу с этой хуйней разбираться
 
 import { TodoDto, TodoUpdateDto } from './dto/todo.dto';
 import { TodoEntity } from './todo.entity';
@@ -9,15 +10,15 @@ import { TodoEntity } from './todo.entity';
 export class TodoService {
   constructor(
     @InjectRepository(TodoEntity)
-    private todoRepository: Repository<TodoEntity>,
+    private todoRepository: MongoRepository<TodoEntity>,
   ) {}
 
-  async list(): Promise<TodoEntity[]> {
-    return this.todoRepository.find();
+  async list(user: number): Promise<TodoEntity[]> {
+    return this.todoRepository.find({ where: { user } });
   }
 
-  async detail(id: ObjectId): Promise<TodoEntity> {
-    const item = await this.todoRepository.findOneBy({ id });
+  async detail(id: string): Promise<TodoEntity> {
+    const item = await this.todoRepository.findOneBy({ _id: new ObjectId(id) });
 
     if (!item) {
       throw new NotFoundException('Запись не найдена');
@@ -26,21 +27,21 @@ export class TodoService {
     return item;
   }
 
-  async create(dto: TodoDto) {
+  async create(dto: TodoDto): Promise<TodoEntity> {
     return this.todoRepository.save(dto);
   }
 
-  async update(id: ObjectId, dto: TodoUpdateDto) {
-    await this.todoRepository.update(id, dto);
+  async update(id: string, data: TodoUpdateDto) {
+    await this.todoRepository.update(id, data);
   }
 
-  async delete(id: ObjectId) {
+  async delete(id: string) {
     const item = await this.detail(id);
 
     if (!item) {
       throw new NotFoundException('Запись не найдена');
     }
 
-    await this.todoRepository.remove(item);
+    await this.todoRepository.delete(id);
   }
 }

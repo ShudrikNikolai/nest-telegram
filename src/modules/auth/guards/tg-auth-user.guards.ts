@@ -2,10 +2,10 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { TelegrafExecutionContext, TelegrafException } from 'nestjs-telegraf';
 
 import { UserService } from '@/modules/user/user.service';
-import { Context } from '@/modules/telegram/interfaces/context.interface';
+import { Context } from '@/common/interfaces/tg-context.interface';
 
 @Injectable()
-export class AuthUsersGuard implements CanActivate {
+class AuthUsersGuard implements CanActivate {
   constructor(private readonly userService: UserService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -25,3 +25,5 @@ export class AuthUsersGuard implements CanActivate {
     return true;
   }
 }
+
+export default AuthUsersGuard;
