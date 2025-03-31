@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-import { TelegramModule } from '@/shared/telegram/bots/base/telegram.module';
-import { MemeTgModule } from '@/shared/telegram/bots/meme/meme.module';
+import { TelegramModule } from '@/modules/telegram/bots/base/telegram.module';
+import { MemeTgModule } from '@/modules/telegram/bots/meme/meme.module';
 
-import { TgSessionMiddleware } from './middlewares/tg-session.middleware';
-import { MEME_BOT, TELEGRAM_BOT } from '@/shared/telegram/tg-app.constant';
+import { TgSessionMiddleware } from '@/modules/telegram/middlewares/tg-session.middleware';
+import { MEME_BOT, TELEGRAM_BOT } from '@/modules/telegram/tg-app.constant';
 
 // навернем говнеца тут, потом переделаю мб
 @Module({

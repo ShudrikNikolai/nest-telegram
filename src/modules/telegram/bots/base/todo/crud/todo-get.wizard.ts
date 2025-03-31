@@ -1,8 +1,8 @@
 import { Ctx, Sender, Wizard, WizardStep } from 'nestjs-telegraf';
 import { WizardContext } from 'telegraf/typings/scenes';
-import { APP } from 'src/shared/telegram/bots/base/constants';
+import { APP } from '@/modules/telegram/bots/base/constants';
 import { ITgCamel } from '@/common/interfaces';
-import { TelegramService } from '@/shared/telegram/bots/base/telegram.service';
+import { TelegramService } from '@/modules/telegram/bots/base/telegram.service';
 
 @Wizard(APP.TODO_CRUD.GET)
 export class TodoGetWizard {

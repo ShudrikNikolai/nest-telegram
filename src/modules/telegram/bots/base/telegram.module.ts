@@ -6,8 +6,8 @@ import { LoggerModule } from '@/shared/logger/logger.module';
 
 import { TelegramUpdate } from './telegram.update';
 import { TelegramService } from './telegram.service';
-import { TodoScene } from '@/shared/telegram/bots/base/todo/todo.scene';
-import { TodoCrudServices } from '@/shared/telegram/bots/base/todo/todo.services';
+import { TodoScene } from '@/modules/telegram/bots/base/todo/todo.scene';
+import { TodoCrudServices } from '@/modules/telegram/bots/base/todo/todo.services';
 
 @Module({
   imports: [UserModule, TodoModule, LoggerModule],

@@ -6,7 +6,7 @@ import config from '@/config';
 import { DatabaseModule } from '@/shared/database/database.module';
 import { HealthModule } from '@/modules/health/health.module';
 import { SharedModule } from '@/shared/shared.module';
-import { TgModule } from '@/shared/telegram/telegram.module';
+import { TgModule } from '@/modules/telegram/telegram.module';
 
 @Module({
   imports: [

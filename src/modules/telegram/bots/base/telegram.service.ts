@@ -8,7 +8,7 @@ import { UserService } from '@/modules/user/user.service';
 import { TodoService } from '@/modules/todo/todo.service';
 import { TodoEntity } from '@/modules/todo/todo.entity';
 import { APP, BUTTONS, TEXTS } from './constants';
-import { TELEGRAM_BOT } from '@/shared/telegram/tg-app.constant';
+import { TELEGRAM_BOT } from '@/modules/telegram/tg-app.constant';
 
 @Injectable()
 export class TelegramService {

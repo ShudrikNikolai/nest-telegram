@@ -15,7 +15,7 @@ import { TgTelegrafExceptionFilter } from '@/common/filters/tg-telegraf-exceptio
 import { SneakCaseToCamelCasePipe } from '@/common/pipes/tg-sneak-to-camel.pipe';
 import { Context, ITgBase, ITgCamel } from '@/common/interfaces';
 import { TgAuthUsersGuard, TgAdminGuard } from '@/modules/auth/guards';
-import { APP, CMD } from 'src/shared/telegram/bots/base/constants';
+import { APP, CMD } from 'src/modules/telegram/bots/base/constants';
 import { TelegramService } from './telegram.service';
 
 // нахуя я всю эту херню нагородил хз

@@ -1,7 +1,7 @@
 import { Ctx, Message, On, Sender, Wizard, WizardStep } from 'nestjs-telegraf';
 import { WizardContext } from 'telegraf/typings/scenes';
-import { APP } from 'src/shared/telegram/bots/base/constants';
-import { TelegramService } from '@/shared/telegram/bots/base/telegram.service';
+import { APP } from '@/modules/telegram/bots/base/constants';
+import { TelegramService } from '@/modules/telegram/bots/base/telegram.service';
 import { ITgCamel } from '@/common/interfaces';
 // Тут бы с wizard что-нибудь выдумать, чтобы не копипастить,
 // но я чет заебался, так что и так пойдет
