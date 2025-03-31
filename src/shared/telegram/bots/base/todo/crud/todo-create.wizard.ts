@@ -1,19 +1,18 @@
 import { Ctx, Message, On, Sender, Wizard, WizardStep } from 'nestjs-telegraf';
 import { WizardContext } from 'telegraf/typings/scenes';
-import { APP } from '@/bots/base/constants';
-import { TelegramService } from '@/bots/base/telegram.service';
+import { APP } from 'src/shared/telegram/bots/base/constants';
+import { TelegramService } from '@/shared/telegram/bots/base/telegram.service';
 import { ITgCamel } from '@/common/interfaces';
-
-@Wizard(APP.TODO_CRUD.DELETE)
-export class TodoDeleteWizard {
+// Тут бы с wizard что-нибудь выдумать, чтобы не копипастить,
+// но я чет заебался, так что и так пойдет
+@Wizard(APP.TODO_CRUD.CREATE)
+export class TodoCreateWizard {
   constructor(private readonly telegramService: TelegramService) {}
-
   @WizardStep(1)
   async onSceneEnter(@Ctx() ctx: WizardContext): Promise<string> {
-    // @ts-ignore
     await ctx.wizard.next();
 
-    return 'Загружаем вашу срань';
+    return 'Введите свою хуйню, а я уж постараюсь не проебаться...';
   }
 
   @On('text')
@@ -22,18 +21,14 @@ export class TodoDeleteWizard {
     @Ctx() ctx: WizardContext,
     @Message() msg: { text: string },
     @Sender() user: ITgCamel.IUser,
-  ): Promise<string> {
+  ): Promise<void> {
     await this.telegramService.onTodoActions(
-      APP.TODO_CRUD.DELETE,
+      APP.TODO_CRUD.CREATE,
       user,
       user.id,
-      undefined,
-      // @ts-ignore
       msg.text,
     );
-    // @ts-ignore
-    await ctx.scene.leave();
 
-    return 'Done бля';
+    await ctx.scene.leave();
   }
 }
