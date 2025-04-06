@@ -20,7 +20,7 @@
 
 ## Установка
 
-1. Клонируй репозиторий: `git clone <ссылка на репозиторий>`.
+1. Клонируй репозиторий: `git clone https://github.com/ShudrikNikolai/nest-telegram.git`.
 2. Установи зависимости: `npm install` или `yarn install`.
 3. Настрой переменные окружения (например, токен Telegram-бота).
 4. Запусти приложение: `npm run start` или `yarn start`.
