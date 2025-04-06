@@ -1,0 +1,54 @@
+services:
+  mongodb:
+    image: mongo
+    hostname: mongodb
+    restart: always
+    networks:
+      - starter-network
+    ports:
+      - "27017:27017"
+    #    environment:
+    #      MONGO_INITDB_ROOT_USERNAME: admin
+    #      MONGO_INITDB_ROOT_PASSWORD: admin
+    #      MONGO_INITDB_DATABASE: nest
+    volumes:
+      - starterdata:/data/db
+      - ./scripts/rs-init.sh:/scripts/rs-init.sh
+    #entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--configsvr", "--replSet"]
+    entrypoint: ["/usr/bin/mongod", "--bind_ip_all", "--replSet", "dbrs"]
+  redis:
+    image: redis
+    container_name: started-redis
+    restart: unless-stopped
+    networks:
+      - starter-network
+    volumes:
+      - starterdata:/data/db
+    ports:
+      - "6379:6379"
+  app:
+    container_name: app
+    restart: no
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    environment:
+      - TZ=Europe/Moscow
+      - NODE_ENV=prod
+      - HOST=0.0.0.0
+    env_file:
+      # - .env
+      - ./config/.env.prod
+    ports:
+      - "4000:4000"
+    volumes:
+      - starterdata:/data/app
+    depends_on:
+      - mongodb
+      - redis
+    command: yarn start:dev
+networks:
+  starter-network:
+    driver: bridge
+volumes:
+  starterdata:

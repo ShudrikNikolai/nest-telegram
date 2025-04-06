@@ -6,7 +6,8 @@ export const isMainCluster =
 export const isMainProcess = cluster.isPrimary || isMainCluster;
 export const isPrimaryProcess = cluster.isPrimary;
 
-export const isDev = process.env.NODE_ENV === 'development';
+export const externalDockerHost = 'docker.for.mac.host.internal';
+export const isDev = process.env.NODE_ENV === 'dev';
 
 export const isTest = !!process.env.TEST;
 export const cwd = process.cwd();

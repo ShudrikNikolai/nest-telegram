@@ -14,8 +14,8 @@ import { TgModule } from '@/modules/telegram/telegram.module';
       isGlobal: true,
       expandVariables: true,
       envFilePath: [
-        //'./config/.env.local',
-        //`./config/.env.${process.env.NODE_ENV}`,
+        './config/.env.local',
+        `./config/.env.${process.env.NODE_ENV}`,
         './config/.env',
       ],
       load: [...Object.values(config)],
