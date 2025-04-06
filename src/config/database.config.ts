@@ -1,13 +1,13 @@
-// import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import { ConfigType, registerAs } from '@nestjs/config';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { env, envBoolean } from '@/global/env';
+import { envBoolean, envString } from '@/global/env';
 
-// dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env' });
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mongodb',
-  url: env('DATABASE_URL'),
+  url: envString('DATABASE_URL'),
   synchronize: envBoolean('DATABASE_SYNCHRONIZE', true),
   logging: envBoolean('DATABASE_LOGGING', true),
   entities: ['dist/modules/**/*.entity{.ts,.js}'],
