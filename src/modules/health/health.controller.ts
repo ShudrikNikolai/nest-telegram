@@ -7,6 +7,8 @@ import {
   TypeOrmHealthIndicator,
 } from '@nestjs/terminus';
 import { ApiTags } from '@nestjs/swagger';
+import { CacheService } from '@/shared/redis/cache.service';
+import { API_CACHE_PREFIX } from '@/constants';
 
 @ApiTags('HEALTH')
 @Controller('health')
@@ -16,6 +18,7 @@ export class HealthController {
     private db: TypeOrmHealthIndicator,
     private memory: MemoryHealthIndicator,
     private disk: DiskHealthIndicator,
+    private readonly cache: CacheService,
   ) {}
 
   @Get('me')
@@ -60,5 +63,18 @@ export class HealthController {
       threshold: 250 * 1024 * 1024 * 1024,
       path: '/',
     });
+  }
+
+  @Get('cache')
+  @HealthCheck()
+  async checkCache() {
+    // example:::
+    await this.cache.set(
+      `${API_CACHE_PREFIX}healthCheck`,
+      'healthCheck',
+      60 * 60 * 1000,
+    );
+
+    return this.cache.get(`${API_CACHE_PREFIX}healthCheck`);
   }
 }

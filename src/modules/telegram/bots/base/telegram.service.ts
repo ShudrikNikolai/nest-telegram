@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Telegraf } from 'telegraf';
 import { InjectBot } from 'nestjs-telegraf';
 // import { ObjectId } from 'typeorm'; // блятский ObjectId
@@ -9,6 +9,9 @@ import { TodoService } from '@/modules/todo/todo.service';
 import { TodoEntity } from '@/modules/todo/todo.entity';
 import { APP, BUTTONS, TEXTS } from './constants';
 import { TELEGRAM_BOT } from '@/modules/telegram/tg-app.constant';
+import { RedisPSClient } from '@/shared/redis/redis.client';
+import { REDIS_PS } from '@/shared/redis/redis.constant';
+import { RedisKeys } from '@/constants';
 
 @Injectable()
 export class TelegramService {
@@ -17,6 +20,7 @@ export class TelegramService {
     private readonly userService: UserService,
     private readonly todoService: TodoService,
     private readonly loggerService: LoggerService,
+    @Inject(REDIS_PS) private readonly redis: RedisPSClient,
   ) {}
 
   async registerUser(
@@ -31,6 +35,11 @@ export class TelegramService {
       } else {
         await this.sendApprovePhoneButton(chat.id);
       }
+
+      await this.redis.subClient.set(
+        `${RedisKeys.AUTH_ID_PREFIX}${user?.telegramId}`,
+        JSON.stringify(user),
+      );
     } else {
       await Promise.all([
         this.userService.create({

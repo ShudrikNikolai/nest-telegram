@@ -70,7 +70,6 @@ export class TelegramUpdate {
     @Message('chat') chat: ITgBase.IChat,
     @Message('message_id') messageId: number,
   ): Promise<void> {
-    console.log('A ns nene rfujrj [ez');
     await this.tgService.onDeleteRandomShitMessage(chat.id, messageId);
   }
 }

@@ -5,6 +5,7 @@ import {
   SwaggerConfig,
   swaggerRegToken,
 } from './swagger.config';
+import { RedisConfig, redisRegToken, IRedisConfig } from './redis.config';
 import {
   TelegramConfig,
   telegramRegToken,
@@ -17,6 +18,7 @@ export * from './database.config';
 export * from './swagger.config';
 export * from './telegram.config';
 export * from './meme.config';
+export * from './redis.config';
 
 export interface AllConfigType {
   [appRegToken]: IAppConfig;
@@ -24,6 +26,7 @@ export interface AllConfigType {
   [swaggerRegToken]: ISwaggerConfig;
   [telegramRegToken]: ITelegramConfig;
   [memeTgRegToken]: IMemeTgConfig;
+  [redisRegToken]: IRedisConfig;
 }
 
 export type ConfigKeyPaths = RecordNamePaths<AllConfigType>;
@@ -34,4 +37,5 @@ export default {
   SwaggerConfig,
   TelegramConfig,
   MemeTgConfig,
+  RedisConfig,
 };
